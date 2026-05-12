@@ -13,9 +13,9 @@ app.use(cors());
 app.use(express.json());
 app.use(require('./routes/record'));
 
-// Global error handling
-app.use(function (err, _req, res) {
-  console.error(err.stack);
+// Global error handling (must have 4 args so Express recognises it)
+app.use(function (err, _req, res, next) {
+  console.error(err && err.stack ? err.stack : err);
   res.status(500).send('Something broke!');
 });
 
